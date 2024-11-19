@@ -29,8 +29,8 @@ function createWindow() {
     backgroundColor: '#000',
     webPreferences: {
       devTools: !isProduction,
-      nodeIntegration: true,
-      contextIsolation: false,
+      nodeIntegration: false,
+      contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     },
 

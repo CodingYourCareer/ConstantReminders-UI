@@ -3,29 +3,29 @@ import { Server } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parentPort, threadId } from 'node:worker_threads';
-import { getRequestHeader, splitCookiesString, setResponseStatus, setResponseHeader, send, getRequestHeaders, defineEventHandler, handleCacheHeaders, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, setResponseHeaders, createError, getRouterParam, getQuery as getQuery$1, readBody, getResponseStatusText } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/h3@1.13.0/node_modules/h3/dist/index.mjs';
-import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/vue-bundle-renderer@2.1.1/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { stringify, uneval } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/devalue@5.1.1/node_modules/devalue/index.js';
-import destr from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/destr@2.0.3/node_modules/destr/dist/index.mjs';
-import { withQuery, joinURL, withTrailingSlash, parseURL, withoutBase, getQuery, joinRelativeURL } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/ufo@1.5.4/node_modules/ufo/dist/index.mjs';
-import { propsToString, renderSSRHead } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/@unhead+ssr@1.11.11/node_modules/@unhead/ssr/dist/index.mjs';
-import { createServerHead as createServerHead$1, CapoPlugin } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/unhead@1.11.11/node_modules/unhead/dist/index.mjs';
-import { klona } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/defu@6.1.4/node_modules/defu/dist/defu.mjs';
-import { snakeCase } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/scule@1.3.0/node_modules/scule/dist/index.mjs';
-import { createHooks } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs';
-import { createFetch as createFetch$1, Headers as Headers$1 } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/ofetch@1.4.1/node_modules/ofetch/dist/node.mjs';
-import { createCall, createFetch } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/unenv@1.10.0/node_modules/unenv/runtime/fetch/index.mjs';
+import { getRequestHeader, splitCookiesString, setResponseStatus, setResponseHeader, send, getRequestHeaders, defineEventHandler, handleCacheHeaders, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, setResponseHeaders, createError, getRouterParam, getQuery as getQuery$1, readBody, getResponseStatusText } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/h3/dist/index.mjs';
+import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { stringify, uneval } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/devalue/index.js';
+import destr from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/destr/dist/index.mjs';
+import { withQuery, joinURL, withTrailingSlash, parseURL, withoutBase, getQuery, joinRelativeURL } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/ufo/dist/index.mjs';
+import { propsToString, renderSSRHead } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/@unhead/ssr/dist/index.mjs';
+import { createServerHead as createServerHead$1, CapoPlugin } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/unhead/dist/index.mjs';
+import { klona } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/defu/dist/defu.mjs';
+import { snakeCase } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/scule/dist/index.mjs';
+import { createHooks } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/hookable/dist/index.mjs';
+import { createFetch as createFetch$1, Headers as Headers$1 } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/ofetch/dist/node.mjs';
+import { createCall, createFetch } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/unenv/runtime/fetch/index.mjs';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { consola } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/consola@3.2.3/node_modules/consola/dist/index.mjs';
-import { getContext } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/unctx@2.3.1/node_modules/unctx/dist/index.mjs';
-import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/errx@0.1.0/node_modules/errx/dist/index.js';
-import { isVNode, version, unref } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/vue@3.5.13_typescript@5.6.3/node_modules/vue/index.mjs';
-import { hash } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/ohash@1.1.4/node_modules/ohash/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/unstorage@1.13.1_ioredis@5.4.1/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/unstorage@1.13.1_ioredis@5.4.1/node_modules/unstorage/drivers/fs.mjs';
-import { toRouteMatcher, createRouter } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs';
-import { defineHeadPlugin } from 'file://C:/Users/verke/source/repos/ConstantReminders-UI/node_modules/.pnpm/@unhead+shared@1.11.11/node_modules/@unhead/shared/dist/index.mjs';
+import { consola } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/consola/dist/index.mjs';
+import { getContext } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/unctx/dist/index.mjs';
+import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/errx/dist/index.js';
+import { isVNode, version, unref } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/vue/index.mjs';
+import { hash } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/ohash/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/unstorage/drivers/fs.mjs';
+import { toRouteMatcher, createRouter } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/radix3/dist/index.mjs';
+import { defineHeadPlugin } from 'file://C:/git/codingyourcareer/ConstantReminders-UI/node_modules/@unhead/shared/dist/index.mjs';
 
 function hasReqHeader(event, name, includes) {
   const value = getRequestHeader(event, name);
@@ -171,15 +171,15 @@ if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
 window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 `;
 
-const _S0i1ntB0iz = (function(nitro) {
+const _bpGOdkH86F = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
 });
 
-const rootDir = "C:/Users/verke/source/repos/ConstantReminders-UI";
+const rootDir = "C:/git/codingyourcareer/ConstantReminders-UI";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[]};
+const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"}],"link":[],"style":[],"script":[],"noscript":[],"titleTemplate":"%s | Constant Reminders"};
 
 const appRootTag = "div";
 
@@ -196,7 +196,7 @@ const devReducers = {
   URL: (data) => data instanceof URL ? data.toString() : void 0
 };
 const asyncContext = getContext("nuxt-dev", { asyncContext: true, AsyncLocalStorage });
-const _r29q1mpjkd = (nitroApp) => {
+const _2QacYx82nt = (nitroApp) => {
   const handler = nitroApp.h3App.handler;
   nitroApp.h3App.handler = (event) => {
     return asyncContext.callAsync({ logs: [], event }, () => handler(event));
@@ -266,18 +266,18 @@ function onConsoleLog(callback) {
 }
 
 const plugins = [
-  _S0i1ntB0iz,
-_r29q1mpjkd
+  _bpGOdkH86F,
+_2QacYx82nt
 ];
 
-const _lazy_Hsitum = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_1EHlem = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _lazy_Hsitum, lazy: true, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_Hsitum, lazy: true, middleware: false, method: undefined }
+  { route: '/__nuxt_error', handler: _lazy_1EHlem, lazy: true, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_1EHlem, lazy: true, middleware: false, method: undefined }
 ];
 
-const serverAssets = [{"baseName":"server","dir":"C:/Users/verke/source/repos/ConstantReminders-UI/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"C:/git/codingyourcareer/ConstantReminders-UI/server/assets"}];
 
 const assets = createStorage();
 
@@ -289,11 +289,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:\\Users\\verke\\source\\repos\\ConstantReminders-UI","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:\\Users\\verke\\source\\repos\\ConstantReminders-UI\\server","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:\\Users\\verke\\source\\repos\\ConstantReminders-UI\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:\\Users\\verke\\source\\repos\\ConstantReminders-UI\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"C:\\Users\\verke\\source\\repos\\ConstantReminders-UI\\.data\\kv","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:\\git\\codingyourcareer\\ConstantReminders-UI","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:\\git\\codingyourcareer\\ConstantReminders-UI\\server","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:\\git\\codingyourcareer\\ConstantReminders-UI\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:\\git\\codingyourcareer\\ConstantReminders-UI\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"C:\\git\\codingyourcareer\\ConstantReminders-UI\\.data\\kv","ignore":["**/node_modules/**","**/.git/**"]}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -1160,7 +1160,7 @@ function publicAssetsURL(...path) {
 
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;
-const getClientManifest = () => import('file://C:/Users/verke/source/repos/ConstantReminders-UI/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getClientManifest = () => import('file://C:/git/codingyourcareer/ConstantReminders-UI/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
 const getSSRStyles = lazyCachedFunction(() => Promise.resolve().then(function () { return styles$1; }).then((r) => r.default || r));
 const getSPARenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();

@@ -7,7 +7,7 @@ const Platform = builder.Platform
  */
 const options = {
   appId: 'com.app.id',
-  productName: 'electron-nuxt3',
+  productName: 'Constant Reminders',
   // protocols: {
   // name: 'Your deeplink',
   // - Don't forget to set `MimeType: "x-scheme-handler/deeplink"` for `linux.desktop` entry!

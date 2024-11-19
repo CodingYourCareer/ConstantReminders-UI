@@ -29,4 +29,4 @@ export { withCtx, withDirectives, withKeys, withMemo, withModifiers, withScopeId
 export { injectHead, useHead, useSeoMeta, useHeadSafe, useServerHead, useServerSeoMeta, useServerHeadSafe } from '@unhead/vue';
 export { default as useElectron } from '../composables/useElectron';
 export { default as useUpdater } from '../composables/useUpdater';
-export { useNuxtDevTools } from '../node_modules/.pnpm/@nuxt+devtools@1.6.0_rollup@4.27.3_vite@5.4.11_@types+node@22.9.0_sass@1.81.0_terser@5.36.0___njzuupf7eswip5oaf5nd7xcxli/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
+export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';

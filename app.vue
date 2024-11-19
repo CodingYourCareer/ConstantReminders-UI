@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1 class="title">Welcome to Constant Reminders</h1>
+    <p id="electron-status">isElectron: {{ useElectron().isElectron }}</p>
     <p>An App to keep you organized! </p>
+    <NuxtWelcome />
   </div>
 </template>
 
