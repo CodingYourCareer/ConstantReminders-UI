@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+	  "module": "ESNext",
+	  "moduleResolution": "Node",
+	  "target": "ESNext",
+	  "jsx": "preserve",
+	  "allowJs": true,
+	  "resolveJsonModule": true,
+	  "esModuleInterop": true,
+	  "skipLibCheck": true,
+	  "strict": true,
+	  "noImplicitAny": false,
+	  "types": ["jest", "node"],
+	  "baseUrl": ".",
+	  "paths": {
+		"@/*": ["*"]
+	  }
+	},
+	"include": ["**/*.ts", "**/*.vue", "jest.setup.ts"],
+	"exclude": ["node_modules"]
+  }
+  
