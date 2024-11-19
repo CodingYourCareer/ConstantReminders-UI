@@ -8,6 +8,8 @@ node_modules
 .env
 dist
 .DS_Store
+.nuxt/
+
 
 # Electron
 electron-dist
