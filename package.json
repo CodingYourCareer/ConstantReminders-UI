@@ -13,7 +13,7 @@
     "transpile-electron": "tsc -p ./electron --outDir .output/electron",
     "start:electron": "electron ./.output/electron/background.js",
     "dev:electron": "yarn transpile-electron && wait-on http://localhost:3000 && yarn start:electron",
-    "dev:electron:win": "set NODE_ENV=development& concurrently --kill-others \"nuxt dev\" \"yarn transpile-electron && yarn start:electron\"",
+    "dev:electron:win": "set NODE_ENV=development& concurrently --kill-others \"nuxt dev\" \"wait-on http://localhost:3000 && yarn transpile-electron && yarn start:electron\"",
     "build:electron": "yarn build && yarn transpile-electron && node build.js",
     "watch:electron": "tsc-watch -p ./electron --outDir .output/electron --onSuccess \"yarn start:electron\""
   },
