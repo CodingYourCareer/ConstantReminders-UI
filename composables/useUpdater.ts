@@ -8,7 +8,7 @@ const readyToInstall = ref(false);
 const alreadyInitialized = ref(false);
 
 export default function useUpdater() {
-  const isServer = import.meta.server;
+  const isServer = process.server;
   const isElectron = !isServer && typeof window !== 'undefined' && !!window.electronAPI;
   
   if (!isElectron || isServer) return { isElectron };
