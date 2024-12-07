@@ -23,9 +23,6 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  // Disable server-side rendering
-  ssr: false,
-
   vite: {
     optimizeDeps: {
       exclude: ['pinia']
@@ -49,6 +46,8 @@ export default defineNuxtConfig({
 
   oidc: {
     defaultProvider: 'auth0',
+    enabled: true,
+    debug: true,
     providers: {
       auth0: {
         // audience: process.env.NUXT_OIDC_PROVIDERS_AUTH0_AUDIENCE,
@@ -58,21 +57,21 @@ export default defineNuxtConfig({
         clientId: process.env.NUXT_OIDC_PROVIDERS_AUTH0_CLIENT_ID,
         clientSecret: process.env.NUXT_OIDC_PROVIDERS_AUTH0_CLIENT_SECRET,
         grantType: 'authorization_code',
-        scope: ['openid', 'email'],
+        scope: ['openid', 'offline_access', 'profile', 'email'],
         validateIdToken: true,
         validateAccessToken: true,
         exposeAccessToken: true,
-        additionalTokenParameters: {
-          // audience: process.env.NUXT_OIDC_PROVIDERS_AUTH0_AUDIENCE
-        },
+        // additionalTokenParameters: {
+        //   audience: process.env.NUXT_OIDC_PROVIDERS_AUTH0_AUDIENCE
+        // },
         tokenRequestType: 'json'
       }
     },
-    session: {
-      expirationCheck: true,
-      automaticRefresh: true,
-      expirationThreshold: 3600
-    },
+    // session: {
+    //   expirationCheck: true,
+    //   automaticRefresh: true,
+    //   expirationThreshold: 3600
+    // },
     middleware: {
       globalMiddlewareEnabled: false // Disable global middleware
     }
