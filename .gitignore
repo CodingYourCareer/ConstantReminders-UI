@@ -19,3 +19,6 @@ debug.log
 *.log
 debug.json
 errors.json
+
+# Ignore environment variable files
+.env
