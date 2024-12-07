@@ -1,0 +1,20 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "module": "esnext",
+    "target": "esnext",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.vue", "test/**/*.ts", "node_modules/@types", "jest.config.js"],
+  "exclude": ["node_modules"]
+}
