@@ -3,8 +3,11 @@ import { defineNuxtConfig } from 'nuxt/config';
 
 const { resolve } = createResolver(import.meta.url);
 
+const isDeployed = process.env.AUTH_ORIGIN === 'http://localhost:3000' || !process.env.AUTH_ORIGIN ? false : true;
+const deploymentDomain = process.env.AUTH_ORIGIN || 'http://localhost:3000';
+
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-oidc-auth'],
+  modules: ['@nuxtjs/tailwindcss', '@sidebase/nuxt-auth', '@hebilicious/vue-query-nuxt', '@nuxt/eslint'],
 
   // TypeScript configuration
   typescript: {
@@ -16,6 +19,38 @@ export default defineNuxtConfig({
     plugins: {
       tailwindcss: {},
       autoprefixer: {}
+    }
+  },
+
+  runtimeConfig: {
+    nextAuthSecret: process.env.NEXTAUTH_SECRET,
+    auth0ClientId: process.env.AUTH0_CLIENT_ID,
+    auth0ClientSecret: process.env.AUTH0_CLIENT_SECRET,
+    auth0Issuer: process.env.AUTH0_ISSUER,
+    public: {
+      isDeployed
+    }
+  },
+
+  auth: {
+    isEnabled: true,
+    disableServerSideAuth: false,
+    originEnvKey: 'AUTH_ORIGIN',
+    baseURL: `${deploymentDomain}/api/auth`,
+    globalAppMiddleware: {
+      isEnabled: true,
+      allow404WithoutAuth: true,
+      addDefaultCallbackUrl: true
+    },
+    sessionRefresh: {
+      enablePeriodically: true,
+      enableOnWindowFocus: true
+    },
+    provider: {
+      type: 'authjs',
+      trustHost: false,
+      defaultProvider: 'auth0',
+      addDefaultCallbackUrl: true
     }
   },
 
@@ -32,8 +67,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-16',
 
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
       titleTemplate: '%s | Constant Reminders',
       meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
@@ -42,38 +75,5 @@ export default defineNuxtConfig({
 
   experimental: {
     localLayerAliases: true
-  },
-
-  oidc: {
-    defaultProvider: 'auth0',
-    enabled: true,
-    debug: true,
-    providers: {
-      auth0: {
-        // audience: process.env.NUXT_OIDC_PROVIDERS_AUTH0_AUDIENCE,
-        responseType: 'code',
-        redirectUri: process.env.NUXT_OIDC_PROVIDERS_AUTH0_REDIRECT_URI,
-        baseUrl: process.env.NUXT_OIDC_PROVIDERS_AUTH0_BASE_URL,
-        clientId: process.env.NUXT_OIDC_PROVIDERS_AUTH0_CLIENT_ID,
-        clientSecret: process.env.NUXT_OIDC_PROVIDERS_AUTH0_CLIENT_SECRET,
-        grantType: 'authorization_code',
-        scope: ['openid', 'offline_access', 'profile', 'email'],
-        validateIdToken: true,
-        validateAccessToken: true,
-        exposeAccessToken: true,
-        // additionalTokenParameters: {
-        //   audience: process.env.NUXT_OIDC_PROVIDERS_AUTH0_AUDIENCE
-        // },
-        tokenRequestType: 'json'
-      }
-    },
-    // session: {
-    //   expirationCheck: true,
-    //   automaticRefresh: true,
-    //   expirationThreshold: 3600
-    // },
-    middleware: {
-      globalMiddlewareEnabled: false // Disable global middleware
-    }
   }
 });
