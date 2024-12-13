@@ -59,7 +59,7 @@
     "@pinia/nuxt": "^0.7.0",
     "electron-log": "^5.2.2",
     "electron-updater": "^6.3.9",
-    "express": "^4.21.1"
+    "express": "4.21.2"
   },
   "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
