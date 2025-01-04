@@ -1,7 +1,8 @@
 import { ref } from 'vue'
 
 export default function useElectron() {
-  const isServer = process.server
+  // eslint-disable-next-line nuxt/prefer-import-meta
+  const isServer = process.server // not using import.meta because of unit test compatibility between vue/nuxt and electron.
   const isElectron = !isServer && typeof window !== 'undefined' && !!window.electronAPI
 
   if (!isElectron || isServer) return { isElectron }
