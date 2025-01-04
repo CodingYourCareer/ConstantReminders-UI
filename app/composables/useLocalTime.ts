@@ -1,4 +1,5 @@
-import type { Ref } from 'vue';
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 
 /**
  * A composable for converting UTC dates/times into local time strings.
@@ -7,7 +8,7 @@ export default function useLocalTime() {
   /**
    * A ref that holds the latest formatted local time string.
    */
-  const localTime: Ref<string> = ref('');
+  const localTime: Ref<string> = ref('')
 
   /**
    * Converts an ISO UTC datetime (string or Date) into the user's local time format.
@@ -17,11 +18,17 @@ export default function useLocalTime() {
    */
   const toLocalTime = (isoUtcDatetime: string | Date | undefined): string => {
     if (!isoUtcDatetime) {
-      return '';
+      return ''
     }
 
     // Create a new Date object from the provided string or Date object.
-    const date = new Date(isoUtcDatetime);
+    const date = new Date(isoUtcDatetime)
+
+    // Check for an invalid date
+    if (isNaN(date.getTime())) {
+      localTime.value = 'Invalid Date'
+      return localTime.value
+    }
 
     // Define how the date should be formatted.
     const options: Intl.DateTimeFormatOptions = {
@@ -32,14 +39,14 @@ export default function useLocalTime() {
       minute: '2-digit',
       second: '2-digit',
       hour12: true,
-      timeZoneName: 'short'
-    };
+      timeZoneName: 'short',
+    }
 
     // Format the date according to the user's locale and the specified options.
-    localTime.value = new Intl.DateTimeFormat(undefined, options).format(date);
+    localTime.value = new Intl.DateTimeFormat(undefined, options).format(date)
 
-    return localTime.value;
-  };
+    return localTime.value
+  }
 
   return {
     /**
@@ -50,6 +57,6 @@ export default function useLocalTime() {
     /**
      * Function that converts a provided UTC datetime into the local time format.
      */
-    toLocalTime
-  };
+    toLocalTime,
+  }
 }
