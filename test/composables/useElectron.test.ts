@@ -1,4 +1,4 @@
-import useElectron from '../../composables/useElectron';
+import useElectron from '../../app/composables/useElectron';
 
 jest.mock('vue', () => ({
   ref: jest.fn((val) => ({ value: val }))

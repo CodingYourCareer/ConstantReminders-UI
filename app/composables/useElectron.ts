@@ -1,7 +1,5 @@
-import { ref } from 'vue';
-
 export default function useElectron() {
-  const isServer = process.server;
+  const isServer = import.meta.server;
   const isElectron = !isServer && typeof window !== 'undefined' && !!window.electronAPI;
 
   if (!isElectron || isServer) return { isElectron };

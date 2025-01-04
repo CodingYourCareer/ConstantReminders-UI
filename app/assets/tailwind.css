@@ -1,0 +1,116 @@
+@import 'tailwindcss';
+
+@import "@nuxt/ui";
+
+@variant dark (&:is(.dark *));
+
+@theme {
+  --container-8xl: 90rem;
+
+  /* Primary (Teal) */
+  --color-primary-50:  #E6FAF9;
+  --color-primary-100: #CCF5F3;
+  --color-primary-200: #99EBE8;
+  --color-primary-300: #66E0DC;
+  --color-primary-400: #33D6D1;
+  --color-primary-500: #00CCC5;
+  --color-primary-600: #00A19C;
+  --color-primary-700: #007572;
+  --color-primary-800: #004A49;
+  --color-primary-900: #001E1F;
+  --color-primary:     #00CCC5;
+
+  /* Green (Pastel Green) */
+  --color-green-50:  #F1FDF6;
+  --color-green-100: #E2FAEE;
+  --color-green-200: #C4F5DC;
+  --color-green-300: #A6F0CB;
+  --color-green-400: #88EBB9;
+  --color-green-500: #6AE7A8;
+  --color-green-600: #53BA86;
+  --color-green-700: #3D8C64;
+  --color-green-800: #266042;
+  --color-green-900: #0F3321;
+  --color-green:     #6AE7A8;
+
+  /* Blue (Sky/Light Blue) */
+  --color-blue-50:  #EBF8FE;
+  --color-blue-100: #D7F0FD;
+  --color-blue-200: #AFE0FB;
+  --color-blue-300: #87D1F8;
+  --color-blue-400: #5FC2F6;
+  --color-blue-500: #37B2F4;
+  --color-blue-600: #2C8EC3;
+  --color-blue-700: #206A92;
+  --color-blue-800: #144661;
+  --color-blue-900: #082230;
+  --color-blue:     #37B2F4;
+
+  /* Red (Soft/Pastel Red) */
+  --color-red-50:  #FFF1F1;
+  --color-red-100: #FFE3E3;
+  --color-red-200: #FFC7C7;
+  --color-red-300: #FFAAAA;
+  --color-red-400: #FF8E8E;
+  --color-red-500: #FF7171;
+  --color-red-600: #CC5A5A;
+  --color-red-700: #994444;
+  --color-red-800: #662D2D;
+  --color-red-900: #331717;
+  --color-red:     #FF7171;
+
+  /* Slate / Neutral Grays
+     (You can keep these defaults or adjust slightly if you want even softer neutrals.)
+  */
+  --color-slate-50:  #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* Light Mode Brand & Utility Colors */
+  --color-light-textbase:    #333333;
+  --color-light-background:  #f8fafc;
+  --color-light-surface:     #ffffff;
+  --color-light-primary:     #00CCC5; /* matches --color-primary */
+  --color-light-secondary:   #64748b;
+  --color-light-accent:      #37B2F4; /* a friendly blue accent */
+  --color-light-error:       #FF7171;
+  --color-light-info:        #87D1F8;
+  --color-light-success:     #6AE7A8;
+  --color-light-warning:     #f59e0b; /* or a softer #FBC572 for a pastel vibe */
+
+  /* Dark Mode Brand & Utility Colors */
+  --color-dark-textbase:   #e2e8f0;
+  --color-dark-background: #0f172a;
+  --color-dark-surface:    #1e293b;
+  --color-dark-primary:    #00CCC5;
+  --color-dark-secondary:  #94a3b8;
+  --color-dark-accent:     #37B2F4;
+  --color-dark-error:      #FF7171;
+  --color-dark-info:       #37B2F4;
+  --color-dark-success:    #6AE7A8;
+  --color-dark-warning:    #fbbf24;
+
+  --font-sans: Nunito, ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Compatibility styles to ensure defaults for border color are consistent
+   (Tailwind CSS v3 -> v4 changes).
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
