@@ -1,5 +1,5 @@
-import type { FetchContext } from 'ofetch';
-import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack';
+import type { FetchContext } from 'ofetch'
+import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack'
 
 /**
  * Provides utilities for handling API calls and generating fetch options.
@@ -19,23 +19,25 @@ export function useApiUtils() {
      */
     handleApiCall: async <T>(apiCall: Promise<T>, actionName: string): Promise<T> => {
       try {
-        console.log(`Starting ${actionName}`);
+        console.log(`Starting ${actionName}`)
 
         // For development, temporarily disable SSL verification.
         if (process.env.NODE_ENV === 'development') {
-          process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+          process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
         }
 
-        const result = await apiCall;
-        console.log(`Completed ${actionName}`);
-        return result;
-      } catch (error) {
-        console.error(`Error in ${actionName}:`, error);
-        throw error;
-      } finally {
+        const result = await apiCall
+        console.log(`Completed ${actionName}`)
+        return result
+      }
+      catch (error) {
+        console.error(`Error in ${actionName}:`, error)
+        throw error
+      }
+      finally {
         // Reset SSL verification for other calls.
         if (process.env.NODE_ENV === 'development') {
-          process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
+          process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1'
         }
       }
     },
@@ -52,23 +54,23 @@ export function useApiUtils() {
     createFetchOptions: <ResponseType>(): NitroFetchOptions<NitroFetchRequest, 'post' | 'get' | 'head' | 'patch' | 'put' | 'delete' | 'connect' | 'options' | 'trace'> => {
       return {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
 
         // Called on response errors (e.g. non-2xx status codes).
         onResponseError(context: FetchContext<ResponseType>): void {
-          const { request, response } = context;
-          const url = request instanceof Request ? request.url : String(request);
-          console.error(`API Error: ${response?.status}`, { url });
+          const { request, response } = context
+          const url = request instanceof Request ? request.url : String(request)
+          console.error(`API Error: ${response?.status}`, { url })
         },
 
         // Called on request errors (e.g. network issues).
         onRequestError(context: FetchContext<ResponseType>): void {
-          const { request, error } = context;
-          const url = request instanceof Request ? request.url : String(request);
-          console.error(`Request Error: ${error?.message}`, { url });
-        }
-      } as NitroFetchOptions<NitroFetchRequest, 'post' | 'get' | 'head' | 'patch' | 'put' | 'delete' | 'connect' | 'options' | 'trace'>;
-    }
-  };
+          const { request, error } = context
+          const url = request instanceof Request ? request.url : String(request)
+          console.error(`Request Error: ${error?.message}`, { url })
+        },
+      } as NitroFetchOptions<NitroFetchRequest, 'post' | 'get' | 'head' | 'patch' | 'put' | 'delete' | 'connect' | 'options' | 'trace'>
+    },
+  }
 }

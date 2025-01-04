@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "esnext",
     "verbatimModuleSyntax": false,
@@ -8,8 +7,10 @@
     "esModuleInterop": true,
     "allowJs": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["jest", "vue", "electron"],
+    "composite": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "test/**/*.ts"],
+  "include": ["test/**/*.ts", "app/**/*.ts", "app/**/*.vue", "electron/**/*.cts", "electron/**/*.d.ts"],
   "exclude": ["node_modules"]
 }
