@@ -1,8 +1,12 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-blue-100 via-blue-50 to-purple-100 flex items-center justify-center p-6">
     <div class="w-full max-w-md bg-white rounded-md shadow-lg p-8">
-      <h1 class="text-2xl font-bold text-gray-800 mb-4">Welcome Back!</h1>
-      <p class="text-gray-600 mb-6"> You are logged in. Feel free to access your personalized dashboard or log out. </p>
+      <h1 class="text-2xl font-bold text-gray-800 mb-4">
+        Welcome Back!
+      </h1>
+      <p class="text-gray-600 mb-6">
+        You are logged in. Feel free to access your personalized dashboard or log out.
+      </p>
       <div class="flex space-x-4">
         <NuxtLink
           to="/dashboard"
@@ -17,6 +21,6 @@
 
 <script setup lang="ts">
 definePageMeta({
-  auth: false
+  auth: false,
 })
 </script>

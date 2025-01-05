@@ -1,5 +1,6 @@
-import { BrowserWindow, ipcMain } from 'electron'
-import { autoUpdater } from "electron-updater";
+import type { BrowserWindow } from 'electron'
+import { ipcMain } from 'electron'
+import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 
 // Logger

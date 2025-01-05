@@ -1,4 +1,5 @@
-import { app, BrowserWindow, Menu } from 'electron'
+import type { BrowserWindow } from 'electron'
+import { app, Menu } from 'electron'
 
 // Helpers
 // =======
@@ -16,14 +17,14 @@ export default (mainWindow: BrowserWindow) => {
       submenu: [
         {
           label: 'About ' + name,
-          role: 'about'
+          role: 'about',
         },
         {
           label: 'Quit',
           accelerator: 'Command+Q',
           click() {
             app.quit()
-          }
+          },
         },
         {
           label: 'Reload',
@@ -33,7 +34,7 @@ export default (mainWindow: BrowserWindow) => {
             if (mainWindow) {
               mainWindow.reload()
             }
-          }
+          },
         },
         ...(isDevelopment
           ? [
@@ -45,11 +46,11 @@ export default (mainWindow: BrowserWindow) => {
                   if (mainWindow) {
                     mainWindow.webContents.toggleDevTools()
                   }
-                }
-              }
+                },
+              },
             ]
-          : [])
-      ]
+          : []),
+      ],
     })
 
     const menu = Menu.buildFromTemplate(template)

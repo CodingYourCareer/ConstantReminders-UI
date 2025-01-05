@@ -1,13 +1,13 @@
-import { NuxtAuthHandler } from '#auth';
-import Auth0Provider from 'next-auth/providers/auth0';
+import Auth0Provider from 'next-auth/providers/auth0'
+import { NuxtAuthHandler } from '#auth'
 
 const {
   nextAuthSecret,
   auth0ClientId,
   auth0ClientSecret,
   auth0Issuer,
-  public: { isDeployed }
-} = useRuntimeConfig();
+  public: { isDeployed },
+} = useRuntimeConfig()
 
 export default NuxtAuthHandler({
   debug: isDeployed ? false : true,
@@ -17,7 +17,7 @@ export default NuxtAuthHandler({
       id: 'auth0',
       clientId: auth0ClientId,
       clientSecret: auth0ClientSecret,
-      issuer: auth0Issuer
-    })
-  ]
-});
+      issuer: auth0Issuer,
+    }),
+  ],
+})

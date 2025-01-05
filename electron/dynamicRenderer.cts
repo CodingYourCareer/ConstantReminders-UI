@@ -2,7 +2,7 @@
 // You can implement your custom renderer process configuration etc. here!
 // --------------------------------------------
 import * as path from 'path'
-import { BrowserWindow } from 'electron'
+import type { BrowserWindow } from 'electron'
 import express, { static as serveStatic } from 'express'
 
 // Internals

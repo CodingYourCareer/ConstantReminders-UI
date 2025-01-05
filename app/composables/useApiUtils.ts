@@ -1,5 +1,6 @@
 import type { FetchContext } from 'ofetch'
 import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack'
+import { getToken } from '#auth'
 
 /**
  * Provides utilities for handling API calls and generating fetch options.
@@ -17,7 +18,10 @@ export function useApiUtils() {
      * @returns A promise that resolves to the result of the `apiCall`.
      * @throws Rethrows any error caught during the API call.
      */
-    handleApiCall: async <T>(apiCall: Promise<T>, actionName: string): Promise<T> => {
+    handleApiCall: async <T>(
+      apiCall: Promise<T>,
+      actionName: string,
+    ): Promise<T> => {
       try {
         console.log(`Starting ${actionName}`)
 
@@ -44,33 +48,51 @@ export function useApiUtils() {
 
     /**
      * Creates a base configuration object for a Nitro fetch call.
-     * This includes setting default headers and providing error logging
-     * for both request and response errors.
+     * This includes setting default headers, adding the Bearer token, and providing
+     * error logging for both request and response errors.
      *
      * @typeParam ResponseType - The expected response type for the fetch calls.
      * @returns A typed `NitroFetchOptions` object that includes default
      * headers and error handling callbacks.
      */
-    createFetchOptions: <ResponseType>(): NitroFetchOptions<NitroFetchRequest, 'post' | 'get' | 'head' | 'patch' | 'put' | 'delete' | 'connect' | 'options' | 'trace'> => {
+    createFetchOptions: async <ResponseType>(): Promise<
+      NitroFetchOptions<
+        NitroFetchRequest,
+        | 'post'
+        | 'get'
+        | 'head'
+        | 'patch'
+        | 'put'
+        | 'delete'
+        | 'connect'
+        | 'options'
+        | 'trace'
+      >
+    > => {
+      const token = await getToken() // Retrieve the Bearer token dynamically
+
       return {
         headers: {
           'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}), // Add Authorization header if token exists
         },
 
-        // Called on response errors (e.g. non-2xx status codes).
+        // Called on response errors (e.g., non-2xx status codes).
         onResponseError(context: FetchContext<ResponseType>): void {
           const { request, response } = context
-          const url = request instanceof Request ? request.url : String(request)
+          const url
+            = request instanceof Request ? request.url : String(request)
           console.error(`API Error: ${response?.status}`, { url })
         },
 
-        // Called on request errors (e.g. network issues).
+        // Called on request errors (e.g., network issues).
         onRequestError(context: FetchContext<ResponseType>): void {
           const { request, error } = context
-          const url = request instanceof Request ? request.url : String(request)
+          const url
+            = request instanceof Request ? request.url : String(request)
           console.error(`Request Error: ${error?.message}`, { url })
         },
-      } as NitroFetchOptions<NitroFetchRequest, 'post' | 'get' | 'head' | 'patch' | 'put' | 'delete' | 'connect' | 'options' | 'trace'>
+      }
     },
   }
 }
