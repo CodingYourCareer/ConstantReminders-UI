@@ -26,7 +26,7 @@ const props = defineProps<{
 
 const mobileMenuOpen = ref(false)
 const colorMode = useColorMode()
-const { signIn, signOut, status } = useAuth();
+const { signIn, signOut, status } = useAuth()
 
 const router = useRouter()
 
@@ -186,7 +186,7 @@ function isActiveRoute(routeOrPath?: RouteLocationRaw): boolean {
         <li>
           <UButton
             class="px-3 py-2 transition-colors duration-200 rounded-sm hover:text-light-primary dark:hover:text-dark-primary"
-            @click="status === 'authenticated' ? signOut() : signIn('auth0')"
+            @click="status === 'authenticated' ? signOut({ callbackUrl: '/' }) : signIn('auth0')"
           >
             Log {{ status === 'authenticated' ? 'out' : 'in' }}
           </UButton>

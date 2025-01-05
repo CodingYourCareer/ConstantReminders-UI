@@ -1,6 +1,5 @@
 import type { FetchContext } from 'ofetch'
 import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack'
-import { getToken } from '#auth'
 
 /**
  * Provides utilities for handling API calls and generating fetch options.
@@ -31,6 +30,11 @@ export function useApiUtils() {
         }
 
         const result = await apiCall
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`Completed ${actionName} result:`, result)
+        }
+
         console.log(`Completed ${actionName}`)
         return result
       }
@@ -69,23 +73,31 @@ export function useApiUtils() {
         | 'trace'
       >
     > => {
-      const token = await getToken() // Retrieve the Bearer token dynamically
+      const { getSession } = useAuth() // Ignore this error. Nuxt auto imports it but typescript is stupid
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      }
+
+      try {
+        const session = await getSession()
+        console.log('THE TOKEN IS HERE IDIOT: ', session.accessToken)
+        if (session?.accessToken) {
+          headers.Authorization = `Bearer ${session.accessToken}`
+        }
+      }
+      catch (error) {
+        console.error('Error getting session:', error)
+      }
 
       return {
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}), // Add Authorization header if token exists
-        },
-
-        // Called on response errors (e.g., non-2xx status codes).
+        headers,
+        credentials: 'include',
         onResponseError(context: FetchContext<ResponseType>): void {
           const { request, response } = context
           const url
             = request instanceof Request ? request.url : String(request)
           console.error(`API Error: ${response?.status}`, { url })
         },
-
-        // Called on request errors (e.g., network issues).
         onRequestError(context: FetchContext<ResponseType>): void {
           const { request, error } = context
           const url

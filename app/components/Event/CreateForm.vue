@@ -32,7 +32,7 @@
              disabled:cursor-not-allowed w-full"
       @click="handleCreate"
     >
-      {{ createEventMutation.isPending ? 'Creating...' : 'Create Event' }}
+      {{ createEventMutation.isPending.value ? 'Creating...' : 'Create Event' }}
     </button>
 
     <!-- Error Message (if mutation fails) -->
@@ -56,6 +56,8 @@ const { createEventMutation } = useEvents()
 // The event name field
 const eventName = ref('')
 
+const emit = defineEmits(['createdSuccessfully'])
+
 function handleCreate() {
   if (!eventName.value.trim()) {
     return
@@ -71,6 +73,7 @@ function handleCreate() {
     onSuccess: () => {
       // Clear the input on success
       eventName.value = ''
+      emit('createdSuccessfully')
     },
   })
 }

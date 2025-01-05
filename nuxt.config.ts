@@ -58,6 +58,7 @@ export default defineNuxtConfig({
     auth0ClientId: process.env.AUTH0_CLIENT_ID,
     auth0ClientSecret: process.env.AUTH0_CLIENT_SECRET,
     auth0Issuer: process.env.AUTH0_ISSUER,
+    auth0ApiAudience: process.env.AUTH0_API_AUDIENCE,
   },
   future: {
     compatibilityVersion: 4,

@@ -18,26 +18,26 @@ export default function useEvents() {
    * { data, isLoading, isError, error, ... }
    */
   const listEventsQuery = useQuery<IApiResponse<IEvent[]>>({
-    // The unique key identifying this query (for caching, refetching, etc.)
     queryKey: ['listEvents'],
-    // The function that actually fetches the events
     queryFn: async () => {
+      // Get fetch options first
+      const fetchOptions = await createFetchOptions<IApiResponse<IEvent[]>>()
+
+      // Log the complete headers
+      console.log('Request Headers:', {
+        ...fetchOptions.headers,
+        method: 'GET',
+        url: baseUrl,
+      })
+
       return handleApiCall(
         $fetch<IApiResponse<IEvent[]>>(baseUrl, {
-          ...createFetchOptions<IApiResponse<IEvent[]>>(),
+          ...fetchOptions,
           method: 'GET',
         }),
         'listEvents',
       )
     },
-    // Placeholder data to show until the real data returns
-    placeholderData: () => ({
-      data: [],
-      isSuccess: true,
-      status: 200,
-      errors: [],
-      message: 'No events found',
-    }),
   })
 
   /**
@@ -53,13 +53,16 @@ export default function useEvents() {
     ICreateEventRequest // payload shape
   >({
     mutationFn: async (newEvent: ICreateEventRequest) => {
+      // IMPORTANT: Await the fetch options
+      const fetchOptions = await createFetchOptions<
+        IApiResponse<{ event: IEvent | null, message?: string }>
+      >()
+
       return handleApiCall(
         $fetch<IApiResponse<{ event: IEvent | null, message?: string }>>(
           `${baseUrl}/create`,
           {
-            ...createFetchOptions<
-              IApiResponse<{ event: IEvent | null, message?: string }>
-            >(),
+            ...fetchOptions,
             method: 'POST',
             body: newEvent,
           },
@@ -67,8 +70,8 @@ export default function useEvents() {
         'createEvent',
       )
     },
-    // If creation is successful, re-fetch the event list (optional)
     onSuccess: () => {
+      // If creation is successful, re-fetch the event list (optional)
       queryClient.invalidateQueries({ queryKey: ['listEvents'] })
     },
     onError: (error: Error) => {

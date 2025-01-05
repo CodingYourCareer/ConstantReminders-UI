@@ -6,7 +6,7 @@
 
     <!-- Loading State -->
     <div
-      v-if="listEventsQuery.isLoading"
+      v-if="listEventsQuery.isLoading.value"
       class="text-light-secondary dark:text-dark-secondary"
     >
       Loading events...
@@ -14,10 +14,11 @@
 
     <!-- Error State -->
     <div
-      v-else-if="listEventsQuery.isError"
+      v-else-if="listEventsQuery.isError.value"
       class="text-light-error dark:text-dark-error"
     >
-      Error loading events: {{ listEventsQuery.error?.value?.message }}
+      Error loading events:
+      {{ listEventsQuery.error?.value?.message }}
     </div>
 
     <!-- Empty State -->
@@ -42,7 +43,6 @@
         v-for="eventItem in events"
         :key="eventItem.id"
       >
-        <!-- Reusable EventCard component -->
         <EventCard :event="eventItem" />
       </li>
     </ul>
@@ -50,12 +50,13 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import useEvents from '~/composables/useEventsService'
 import type { IEvent } from '~/types'
 
 const { listEventsQuery } = useEvents()
 
 const events = computed<IEvent[]>(() => {
-  return listEventsQuery.data.value?.data || []
+  return listEventsQuery.data.value?.data ?? []
 })
 </script>
