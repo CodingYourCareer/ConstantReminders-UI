@@ -1,35 +1,83 @@
-import { createResolver } from '@nuxt/kit';
-import { defineNuxtConfig } from 'nuxt/config';
+import Tailwind from '@tailwindcss/vite'
 
-const { resolve } = createResolver(import.meta.url);
-
-const isDeployed = process.env.AUTH_ORIGIN === 'http://localhost:3000' || !process.env.AUTH_ORIGIN ? false : true;
-const deploymentDomain = process.env.AUTH_ORIGIN || 'http://localhost:3000';
+const isDeployed
+  = process.env.AUTH_ORIGIN === 'http://localhost:3000'
+  || !process.env.AUTH_ORIGIN
+    ? false
+    : true
+const deploymentDomain = process.env.AUTH_ORIGIN || 'http://localhost:3000'
 
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss', '@sidebase/nuxt-auth', '@hebilicious/vue-query-nuxt', '@nuxt/eslint'],
+  modules: [
+    '@sidebase/nuxt-auth',
+    '@nuxt/eslint',
+    '@nuxt/icon',
+    '@nuxt/fonts',
+    '@nuxtjs/color-mode',
+    '@hebilicious/vue-query-nuxt',
+    '@nuxt/scripts',
+    '@nuxtjs/seo',
+    '@vueuse/nuxt',
+    '@nuxt/ui',
+  ],
 
-  // TypeScript configuration
-  typescript: {
-    shim: false,
-    strict: true
+  devtools: {
+    enabled: true,
+    timeline: {
+      enabled: true,
+    },
   },
 
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {}
-    }
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
+    head: {
+      titleTemplate: '%s | Constant Reminders',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ],
+    },
+  },
+
+  css: ['./app/assets/tailwind.css'],
+
+  colorMode: {
+    classSuffix: '',
+    preference: 'system',
+    fallback: 'light',
+    dataValue: 'theme',
   },
 
   runtimeConfig: {
+    public: {
+      // NUXT_PUBLIC_API_BASE_URL=<your-url>
+      apiBaseUrl: '',
+      isDeployed,
+    },
     nextAuthSecret: process.env.NEXTAUTH_SECRET,
     auth0ClientId: process.env.AUTH0_CLIENT_ID,
     auth0ClientSecret: process.env.AUTH0_CLIENT_SECRET,
     auth0Issuer: process.env.AUTH0_ISSUER,
-    public: {
-      isDeployed
-    }
+    auth0ApiAudience: process.env.AUTH0_API_AUDIENCE,
+  },
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  experimental: {
+    componentIslands: true,
+  },
+
+  compatibilityDate: '2024-11-16',
+
+  vite: {
+    plugins: [Tailwind()],
+  },
+
+  // TypeScript configuration
+  typescript: {
+    shim: false,
+    strict: true,
   },
 
   auth: {
@@ -40,40 +88,32 @@ export default defineNuxtConfig({
     globalAppMiddleware: {
       isEnabled: true,
       allow404WithoutAuth: true,
-      addDefaultCallbackUrl: true
+      addDefaultCallbackUrl: true,
     },
     sessionRefresh: {
       enablePeriodically: true,
-      enableOnWindowFocus: true
+      enableOnWindowFocus: true,
     },
     provider: {
       type: 'authjs',
       trustHost: false,
       defaultProvider: 'auth0',
-      addDefaultCallbackUrl: true
-    }
+      addDefaultCallbackUrl: true,
+    },
   },
 
-  css: [resolve('./assets/tailwind.css')],
-
-  devtools: { enabled: true },
-
-  vite: {
-    optimizeDeps: {
-      exclude: ['pinia']
-    }
+  eslint: {
+    config: {
+      stylistic: true,
+    },
   },
 
-  compatibilityDate: '2024-11-16',
-
-  app: {
-    head: {
-      titleTemplate: '%s | Constant Reminders',
-      meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
-    }
+  schemaOrg: {
+    identity: {
+      type: 'Organization',
+      name: 'Coding Your Career',
+      url: process.env.NUXT_SITE_URL,
+      // logo: "/CRCLogo.png",
+    },
   },
-
-  experimental: {
-    localLayerAliases: true
-  }
-});
+})

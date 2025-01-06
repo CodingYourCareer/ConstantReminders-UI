@@ -1,5 +1,5 @@
 export default {
-  preset: 'ts-jest/presets/default-esm',
+  preset: 'ts-jest',
   testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node', 'vue'],
   transform: {
@@ -7,13 +7,13 @@ export default {
       'ts-jest',
       {
         useESM: true,
-        tsconfig: 'tsconfig.test.json'
-      }
-    ]
+        tsconfig: 'tsconfig.test.json',
+      },
+    ],
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
-    '^(\\.{1,2}/.*)\\.js$': '$1'
+    '^(\\.{1,2}/.*)\\.js$': '$1',
   },
-  extensionsToTreatAsEsm: ['.ts', '.tsx']
-};
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+}

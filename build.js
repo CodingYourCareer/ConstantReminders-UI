@@ -1,5 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const builder = require('electron-builder')
+
 const Platform = builder.Platform
 
 /**
@@ -31,20 +31,20 @@ const options = {
   buildDependenciesFromSource: false,
 
   directories: {
-    output: 'electron-dist'
+    output: 'electron-dist',
   },
   win: {
-    // eslint-disable-next-line no-template-curly-in-string
+
     artifactName: '${productName}-Setup-${version}.${ext}',
     target: [
       {
         target: 'nsis',
-        arch: ['x64', 'ia32']
-      }
-    ]
+        arch: ['x64', 'ia32'],
+      },
+    ],
   },
   nsis: {
-    deleteAppDataOnUninstall: true
+    deleteAppDataOnUninstall: true,
   },
   mac: {
     category: 'public.app-category.entertainment',
@@ -53,26 +53,26 @@ const options = {
     target: [
       {
         target: 'default',
-        arch: ['x64', 'arm64']
-      }
-    ]
+        arch: ['x64', 'arm64'],
+      },
+    ],
   },
   linux: {
     maintainer: 'Your Name',
     desktop: {
       StartupNotify: 'false',
       Encoding: 'UTF-8',
-      MimeType: 'x-scheme-handler/deeplink'
+      MimeType: 'x-scheme-handler/deeplink',
     },
-    target: ['AppImage', 'rpm', 'deb']
-  }
+    target: ['AppImage', 'rpm', 'deb'],
+  },
 }
 
 const platform = 'WINDOWS' // "MAC" | "LINUX" | "WINDOWS" - Change this to build for other platforms
 builder
   .build({
     targets: Platform[platform].createTarget(),
-    config: options
+    config: options,
   })
   .then((result) => {
     console.log('----------------------------')
