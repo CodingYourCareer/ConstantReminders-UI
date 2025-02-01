@@ -13,17 +13,19 @@ const {
 
 async function refreshAccessToken(accessToken) {
   try {
-    const url = `${auth0Issuer}/oauth/token`
+    console.log("Refresh Token:", accessToken.refreshToken); // Log here to ensure it's defined
+
+    const url = `${auth0Issuer}/oauth/token`;
 
     // Construct the request body
     const params = new URLSearchParams({
       grant_type: 'refresh_token',
       client_id: auth0ClientId,
       refresh_token: accessToken.refreshToken,
-    })
+    });
 
     if (auth0ClientSecret) {
-      params.append('client_secret', auth0ClientSecret)
+      params.append('client_secret', auth0ClientSecret);
     }
 
     const req = await fetch(url, {
@@ -32,13 +34,13 @@ async function refreshAccessToken(accessToken) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: params.toString(),
-    })
+    });
 
-    const res = await req.json()
+    const res = await req.json();
 
     // If the request was not successful, handle the error
     if (!req.ok) {
-      throw new Error(res.error_description || 'Failed to refresh token')
+      throw new Error(res.error_description || 'Failed to refresh token');
     }
 
     return {
@@ -47,16 +49,16 @@ async function refreshAccessToken(accessToken) {
       accessTokenExpires: Date.now() + res.expires_in * 1000,
       // If Auth0 doesn't return a new refresh_token, fall back to the old one
       refreshToken: res.refresh_token ?? accessToken.refreshToken,
-    }
-  }
-  catch (error) {
-    console.error(error)
+    };
+  } catch (error) {
+    console.error(error);
     return {
       ...accessToken,
       error: 'RefreshAccessTokenError',
-    }
+    };
   }
 }
+
 
 export default NuxtAuthHandler({
   debug: isDeployed ? false : true,

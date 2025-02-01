@@ -8,6 +8,18 @@
         <NuxtLoadingIndicator />
         <NuxtPage />
       </NuxtLayout>
+      <!-- testing registration component -->
+      <!-- <Registration /> -->
     </Body>
   </UApp>
 </template>
+
+<!-- <script>
+import Registration from './pages/registration.vue'; // Adjust the path as needed
+
+export default {
+  components: {
+    Registration,
+  },
+};
+</script> -->
