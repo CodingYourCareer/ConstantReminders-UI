@@ -1,20 +1,29 @@
 // /server/api/user-registration.js
 export default defineEventHandler(async (event) => {
-    //  access the request body with `event.body`
-    const body = await readBody(event);
-  
-    // Basic validation (expand as needed)
-    if (!body.firstName || !body.lastName || !body.email || !body.phone) {
-      return createError({
-        statusCode: 400,
-        message: 'All fields are required',
-      });
-    }
-  
-    // Simulate a successful registration response
-    return {
-      statusCode: 200,
-      message: 'User registered successfully!',
-    };
-  });
+  // Access the request body with `event.body`
+  const body = await readBody(event);
+
+  // Validation for required fields
+  if (!body.lastName) { // Last name is required
+    return createError({
+      statusCode: 400,
+      message: 'Last name is required',
+    });
+  }
+
+  // At least one of phone or email must be provided
+  if (!body.phone && !body.email) {
+    return createError({
+      statusCode: 400,
+      message: 'At least one of phone or email is required',
+    });
+  }
+
+  // Simulate a successful registration response
+  return {
+    statusCode: 200,
+    message: 'User registered successfully!',
+  };
+});
+
   

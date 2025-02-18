@@ -13,9 +13,6 @@ const {
 
 async function refreshAccessToken(accessToken) {
   try {
-    console.log("Refresh Token:", accessToken.refreshToken); // Log here to ensure it's defined
-
-    const url = `${auth0Issuer}/oauth/token`;
 
     // Construct the request body
     const params = new URLSearchParams({

@@ -5,6 +5,7 @@ const navItems = [
   { label: 'Home', to: '/', requiresAuth: false },
   { label: 'Features', to: '/features', requiresAuth: false },
   { label: 'Dashboard', to: '/dashboard', requiresAuth: true },
+  { label: 'Registration', to: '/registration', requiresAuth: false},
 ]
 </script>
 
