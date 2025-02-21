@@ -2,8 +2,8 @@
 export interface IUserRegistration {
     username: string;
     email?: string
-    firstName?: string; // Optional field
-    lastName: string;  // Optional field
+    firstName?: string; 
+    lastName: string;  
     phone?: string;
   }
   

@@ -1,4 +1,7 @@
-// /server/api/user-registration.js
+// This is debugging code for a mock API endpoint until the backend API is built out...
+// 
+// // /server/api/user-registration.js
+
 export default defineEventHandler(async (event) => {
   // Access the request body with `event.body`
   const body = await readBody(event);
