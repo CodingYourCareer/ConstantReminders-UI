@@ -80,7 +80,6 @@ export function useApiUtils() {
 
       try {
         const session = await getSession()
-        console.log('THE TOKEN IS HERE IDIOT: ', session.accessToken)
         if (session?.accessToken) {
           headers.Authorization = `Bearer ${session.accessToken}`
         }
